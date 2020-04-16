@@ -1,0 +1,47 @@
+.app-header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: #ef0b59;
+    z-index: 1030;
+    padding-right: 15px;
+}
+
+
+@media (min-width: 768px) {
+    .app-header__logo {
+      -webkit-box-flex: 0;
+          -ms-flex: 0 0 auto;
+              flex: 0 0 auto;
+      display: block;
+      width: 230px;
+      background-color: #da0951;
+    }
+  }
+
+
+.app-sidebar__toggle:focus, .app-sidebar__toggle:hover {
+    color: #fff;
+    background-color: #da0951;
+    text-decoration: none;
+  }
+
+
+
+
+  /* card */
+
+.widget-small.warning.coloured-icon .icon {
+    background-color: #FDB45C;
+    color: #fff;
+}
+
+
+.widget-small.warning {
+  background-color: #FDB45C;
+}
