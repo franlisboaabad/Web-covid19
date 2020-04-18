@@ -59,88 +59,6 @@ function Datos_piechart(url) {
     });
 }
 
-function Datos_linechart(url) {
-
-  fetch(url)
-    .then(response => response.json())
-    .then(({ data }) => {
-
-      const timeline = data.timeline;
-
-      const dates = [];
-      const confirmados = [];
-      const recuperados = [];
-      const muertes = [];
-
-      timeline.forEach(element => {
-        dates.push(element.date);
-      });
-
-
-      timeline.forEach(element => {
-        confirmados.push(element.confirmed);
-      });
-
-      timeline.forEach(element => {
-        recuperados.push(element.recovered);
-      });
-
-      timeline.forEach(element => {
-        muertes.push(element.deaths);
-      });
-
-      var data = {
-        labels: dates.sort(),
-        datasets: [
-          {
-            label: "Casos confirmados",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(255, 209, 51)",
-            pointColor: "rgba(255, 209, 51)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(255, 209, 51)",
-            data: confirmados.sort((a, b) => a - b)
-          },
-          {
-            label: "Casos Recuperados",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(28, 206, 66 )",
-            pointColor: "rgba(28, 206, 66 )",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(28, 206, 66 )",
-            data: recuperados.sort((a, b) => a - b)
-          },
-          {
-            label: "Fallecidos",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(255, 51, 88 )",
-            pointColor: "rgba(255, 51, 88 )",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(255, 51, 88 )",
-            data: muertes.sort((a, b) => a - b)
-          }
-
-        ],
-        options: {
-          responsive: true,
-          title: {
-            display: true,
-            text: 'Chart.js Line Chart'
-          }
-
-        }
-
-      };
-      var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-      var lineChart = new Chart(ctxl).Line(data);
-
-    })
-    .catch((error) => console.log(error))
-}
-
 function Summary(url) {
   let confirmados = document.getElementById('nuevos-confirmados');
   let recuperados = document.getElementById('nuevos-recuperados');
@@ -180,9 +98,172 @@ function Summary(url) {
     });
 }
 
+
+
+function Datos_linechart(url) {
+  let total_confirmados = document.querySelector('#total_confirmados');
+  fetch(url)
+    .then(response => response.json())
+    .then(({ data }) => {
+      const timeline = data.timeline;
+      const dates = [];
+      const confirmados = [];
+
+      timeline.forEach(element => {
+        dates.push(element.date);
+      });
+
+      timeline.forEach(element => {
+        confirmados.push(element.confirmed);
+      });
+
+      total_confirmados.innerHTML =  timeline[0].confirmed;
+      var data = {
+        labels: dates.sort(),
+        datasets: [
+          {
+            label: "Casos confirmados",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(255, 209, 51)",
+            pointColor: "rgba(255, 209, 51)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(255, 209, 51)",
+            data: confirmados.sort((a, b) => a - b)
+          }
+
+        ],
+        options: {
+          responsive: true,
+          title: {
+            display: true,
+            text: 'Chart.js Line Chart'
+          }
+
+        }
+
+      };
+
+      var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+      var lineChart = new Chart(ctxl).Line(data);
+
+    })
+    .catch((error) => console.log(error))
+}
+
+function Datos_barchart_muertes(url) {
+  let total_muertes = document.querySelector('#total_muertes');
+  fetch(url)
+    .then(response => response.json())
+    .then(({ data }) => {
+      const timeline = data.timeline;
+      console.log(timeline);
+      const dates = [];
+      const muertes = [];
+
+      timeline.forEach(element => {
+        dates.push(element.date);
+      });
+
+      timeline.forEach(element => {
+        muertes.push(element.deaths);
+      });
+
+      total_muertes.innerHTML = timeline[0].deaths;
+
+      var data = {
+        labels: dates.sort(),
+        datasets: [
+          {
+            label: "Fallecidos",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(255, 51, 88 )",
+            pointColor: "rgba(255, 51, 88 )",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(255, 51, 88 )",
+            data: muertes.sort((a, b) => a - b)
+          }
+
+        ],
+        options: {
+          responsive: true,
+          title: {
+            display: true,
+            text: 'Chart.js Line Chart'
+          }
+
+        }
+
+      };
+
+      var ctxb = $("#barChartDemo").get(0).getContext("2d");
+      var barChart = new Chart(ctxb).Bar(data);
+
+    })
+    .catch((error) => console.log(error))
+}
+
+function Datos_barchart_recuperados(url) {
+  
+  fetch(url)
+    .then(response => response.json())
+    .then(({ data }) => {
+      const timeline = data.timeline;
+      console.log(timeline);
+      const dates = [];
+      const recuperados = [];
+
+      timeline.forEach(element => {
+        dates.push(element.date);
+      });
+
+      timeline.forEach(element => {
+        recuperados.push(element.recovered);
+      });
+
+      total_recuperados.innerHTML = timeline[0].recovered;
+
+      var data = {
+        labels: dates.sort(),
+        datasets: [
+          {
+            label: "Recuperados",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(28, 206, 66 )",
+            pointColor: "rgba(28, 206, 66 )",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(28, 206, 66 )",
+            data: recuperados.sort((a, b) => a - b)
+          }
+
+        ],
+        options: {
+          responsive: true,
+          title: {
+            display: true,
+            text: 'Chart.js Line Chart'
+          }
+
+        }
+
+      };
+
+      
+      var ctxl = $("#barChartDemo_recuperados").get(0).getContext("2d");
+      var lineChart = new Chart(ctxl).Line(data);
+
+    })
+    .catch((error) => console.log(error))
+}
+
+
 Datos_generales(nueva_url);
 Datos_piechart(nueva_url);
 Datos_linechart(url_actual);
+Datos_barchart_muertes(url_actual);
+Datos_barchart_recuperados(url_actual);
 Summary(url_actual);
 
 

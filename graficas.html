@@ -128,21 +128,45 @@
         </ul> -->
     </div>
 
-    
+
     <!-- Line Chart -->
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <div class="tile">
           <h3 class="tile-title">
-            <span class="badge badge-pill badge-warning">Total Cofirmados </span>
-            <span class="badge badge-pill badge-primary">Total Recuperados </span>
-            <span class="badge badge-pill badge-danger">Total Fallecidos</span>
+            <span class="badge badge-pill badge-warning">Total Cofirmados :</span> <b id="total_confirmados"></b>
           </h3>
           <div class="embed-responsive embed-responsive-16by9">
             <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
           </div>
         </div>
       </div>
+
+
+      <div class="col-md-6">
+        <div class="tile">
+          <h3 class="tile-title"><span class="badge badge-pill badge-success">Total Recuperados : </span> <b
+              id="total_recuperados"></b> </h3>
+          <div class="embed-responsive embed-responsive-16by9">
+            <canvas class="embed-responsive-item" id="barChartDemo_recuperados" width="545" height="305"
+              style="width: 606px; height: 340px;"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="col-md-6">
+      <div class="tile">
+        <h3 class="tile-title"><span class="badge badge-pill badge-danger">Total Muertes : </span> <b
+            id="total_muertes"></b> </h3>
+        <div class="embed-responsive embed-responsive-16by9">
+          <canvas class="embed-responsive-item" id="barChartDemo" width="545" height="305"
+            style="width: 606px; height: 340px;"></canvas>
+        </div>
+      </div>
+    </div>
     </div>
 
   </main>
